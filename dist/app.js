@@ -9,4 +9,5 @@ const server_1 = __importDefault(require("./models/server"));
 dotenv_1.default.config();
 exports.server = new server_1.default();
 exports.server.listen();
+
 //# sourceMappingURL=app.js.map

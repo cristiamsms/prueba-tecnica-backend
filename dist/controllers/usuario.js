@@ -61,6 +61,7 @@ const postUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 exports.postUsuario = postUsuario;
 const renewUsuario = (req, res) => {
     res.json({
+        ok: true,
         msg: "renewUsuario",
     });
 };
