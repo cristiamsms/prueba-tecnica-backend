@@ -78,7 +78,8 @@ export const renewUsuario = (req:Request, res:Response) =>
     
     res.json({
         ok:true,
-        msg: "renewUsuario",
+        msg: "renew Usuario",
+        
    
         
     })
