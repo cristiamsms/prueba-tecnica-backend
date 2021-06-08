@@ -62,7 +62,7 @@ exports.postUsuario = postUsuario;
 const renewUsuario = (req, res) => {
     res.json({
         ok: true,
-        msg: "renewUsuario",
+        msg: "renew Usuario",
     });
 };
 exports.renewUsuario = renewUsuario;

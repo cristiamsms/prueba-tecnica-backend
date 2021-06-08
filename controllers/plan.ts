@@ -52,16 +52,34 @@ export const postPlan = async( req: Request , res: Response ) => {
             if(!body.valor)
             {
                 return res.status(400).json({msg: 'falta un valor'});
-            }
+            } 
+            else {
+           
 
+            if(body.detalle){
+            const convertir = JSON.parse(body.detalle);
+            console.log(convertir);
+            
+            body.detalle = JSON.stringify(convertir.filter((clean:any) => clean !== null && clean !== "")); 
+            
+            const plan =  Plan.build(body);
+        
+            await plan.save();
+            res.json(
+                {   ok: true,
+                    plan
+                    
+                }
+                ); 
+    
+        
+        }
+            
+        } 
         }
 
 
-        const plan =  Plan.build(body);
         
-        await plan.save();
-        res.json(plan); 
-
 
         
     } catch (error) {
@@ -84,7 +102,11 @@ export const putPlan = async(req:Request, res:Response) => {
 
         await plan.update(body);
 
-        res.json(plan);
+        res.json(
+            {
+            ok: true,
+            plan 
+        });
 
     } catch (error) {
 
@@ -110,7 +132,11 @@ export const deletePlan = async(req:Request, res:Response) => {
             return res.status(404).json({msg:'No existe este plan'})
         }
         await plan.update({ estado: false });
-        res.json(plan);
+        res.json({
+            ok: true,
+            plan
+        }
+        );
 
  
 

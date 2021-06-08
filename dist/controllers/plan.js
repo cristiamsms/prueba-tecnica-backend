@@ -45,10 +45,19 @@ const postPlan = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             if (!body.valor) {
                 return res.status(400).json({ msg: 'falta un valor' });
             }
+            else {
+                if (body.detalle) {
+                    const convertir = JSON.parse(body.detalle);
+                    console.log(convertir);
+                    body.detalle = JSON.stringify(convertir.filter((clean) => clean !== null && clean !== ""));
+                    const plan = plan_1.default.build(body);
+                    yield plan.save();
+                    res.json({ ok: true,
+                        plan
+                    });
+                }
+            }
         }
-        const plan = plan_1.default.build(body);
-        yield plan.save();
-        res.json(plan);
     }
     catch (error) {
         res.status(500).json({ msg: 'hable con el administrador' });
@@ -64,7 +73,10 @@ const putPlan = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res.status(404).json({ msg: 'No existe este plan' });
         }
         yield plan.update(body);
-        res.json(plan);
+        res.json({
+            ok: true,
+            plan
+        });
     }
     catch (error) {
         res.status(500).json({
@@ -80,7 +92,10 @@ const deletePlan = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return res.status(404).json({ msg: 'No existe este plan' });
     }
     yield plan.update({ estado: false });
-    res.json(plan);
+    res.json({
+        ok: true,
+        plan
+    });
 });
 exports.deletePlan = deletePlan;
 //# sourceMappingURL=plan.js.map
